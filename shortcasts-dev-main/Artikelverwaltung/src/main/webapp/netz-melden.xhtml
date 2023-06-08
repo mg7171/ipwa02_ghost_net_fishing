@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	<h:head>
+		<title>GHOST NET FISHING</title>
+		<link rel="stylesheet" href="assets/style.css"></link>
+	</h:head>
+	
+	<h:body styleClass="#{loginHandlerBean.userdata eq 1 ? 'loggedin' : 'notLoggedIn'}">
+		<f:event listener="#{loginHandlerBean.checkUserSession}" type="preRenderView" />
+			<ui:include src="assets/navigation.xhtml" />
+			<main class="floating">
+				<div class="container">
+					<h1>Netz melden</h1>
+				    <h:form>
+				        <h:outputLabel for="latitude" value="Breitengrad:" />
+				        <h:inputText a:placeholder="Breitengrad" id="latitude" value="#{netHandlerBean.lat}" required="true" />
+				        <h:outputLabel for="longitude" value="Längengrad:" />
+				        <h:inputText a:placeholder="Längengrad" id="longitude" value="#{netHandlerBean.lng}" required="true" />
+				        <h:outputLabel for="size" value="Geschätze Größe des Netzes (m)" />
+				        <div class="col--3">
+				        	<h:inputText a:placeholder="Länge" id="length" value="#{netHandlerBean.length}" required="true" />
+				        	<h:inputText a:placeholder="Breite" id="width" value="#{netHandlerBean.width}" required="true" />
+				        	<h:inputText a:placeholder="Höhe" id="height" value="#{netHandlerBean.height}" required="true" />				        
+				        </div>
+				        <div class="submit--wrapper">
+				        	<h:commandButton value="MELDEN" action="#{netHandlerBean.save}" />
+				        </div>
+				    </h:form>
+			    </div>
+			</main>
+			<ui:include src="assets/footer.html" />
+	</h:body>
+</html>

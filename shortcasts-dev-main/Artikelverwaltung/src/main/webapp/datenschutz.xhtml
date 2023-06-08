@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>GHOST NET FISHING</title>
+		<link rel="stylesheet" href="assets/style.css"></link>
+	</h:head>
+	
+	<h:body styleClass="#{loginHandlerBean.userdata eq 1 ? 'loggedin' : 'notLoggedIn'}">
+		<f:event listener="#{loginHandlerBean.checkUserSession}" type="preRenderView" />
+			<ui:include src="assets/navigation.xhtml" />
+			<main class="main--wrapper">
+				<h1>Datenschutz</h1>
+				<p>Ihre Privatsphäre ist uns sehr wichtig. Diese Datenschutzrichtlinie erklärt, welche personenbezogenen Daten wir von unseren Nutzern sammeln und wie diese verwendet werden.</p>
+				<p>Wir sammeln Informationen, wenn Sie sich auf unserer Website registrieren, sich in Ihr Konto einloggen, einen Kauf tätigen, und/oder wenn Sie sich ausloggen. Die gesammelten Informationen umfassen Ihren Namen, Ihre E-Mail-Adresse, Ihre Telefonnummer und/oder Kreditkarte.</p>
+				<p>Alle von uns gesammelten Informationen können verwendet werden, um: Ihre Erfahrungen zu personalisieren und auf Ihre individuellen Bedürfnisse zu reagieren, unsere Website zu verbessern, unseren Kundenservice zu verbessern und mit Ihnen per E-Mail zu kommunizieren.</p>
+				<p>Wir sind der Sicherheit Ihrer Informationen verpflichtet. Wir haben geeignete physische und elektronische Sicherheitsmaßnahmen eingeführt, um Ihre online gesammelten personenbezogenen Daten zu sichern und zu schützen.</p>
+			</main>
+			<ui:include src="assets/footer.html" />
+	</h:body>
+</html>

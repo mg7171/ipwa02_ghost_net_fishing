@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<nav>
+	<a href="/Artikelverwaltung/index.xhtml">
+		<h:graphicImage url="assets/logo.svg"></h:graphicImage>
+	</a>
+	<ul>
+		<li>
+			<a href="/ghost_net_fishing/ueber-uns.xhtml">ÜBER UNS</a>
+		</li>
+		<li class="addNet">
+			<a href="/ghost_net_fishing/netz-melden.xhtml" class="btn">NETZ MELDEN</a>
+		</li>
+		<li class="registeredNets">
+			<a href="/ghost_net_fishing/meine-netze.xhtml" class="btn">Meine Netze</a>
+		</li>
+		<li class="logout">
+		    <h:form class="logout">
+        		<h:commandButton value="Abmelden" action="#{loginHandlerBean.logout}" />
+        	</h:form>
+		</li>
+		<li class="login">
+			<a href="/ghost_net_fishing/login.xhtml">LOGIN</a>
+		</li>
+	</ul>
+</nav>
+
+<style type="text/css">
+	body.loggedIn .login,
+	body.loggedIn .addNet{
+		display: none;
+	}
+	body .registeredNets{
+		display: none;
+	}
+	body.loggedIn .registeredNets{
+		display: block;
+	}
+	body.notLoggedIn .marker__details form{
+		display: none !important;
+	}
+	body.notLoggedIn .logout{
+		display: none;
+	}
+	.logout input{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+</style>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>GHOST NET FISHING</title>
+		<link rel="stylesheet" href="assets/style.css"></link>
+	</h:head>
+	
+	<h:body styleClass="#{loginHandlerBean.userdata eq 1 ? 'loggedin' : 'notLoggedIn'}">
+		<f:event listener="#{loginHandlerBean.checkUserSession}" type="preRenderView" />
+			<ui:include src="assets/navigation.xhtml" />
+			<main class="floating">
+				<div class="container">
+					<h1>Login</h1>
+				    <h:form>
+				        <h:outputLabel for="username" value="Username:" />
+				        <h:inputText id="username" value="#{loginHandlerBean.username}" required="true" />
+				        <h:outputLabel for="password" value="Password:" />
+				        <h:inputSecret id="password" value="#{loginHandlerBean.password}" required="true" />
+				        <div class="submit--wrapper">			        
+				        	<h:commandButton value="Login" action="#{loginHandlerBean.login}" />
+				        </div>
+				    </h:form>
+			    </div>
+			</main>
+			<ui:include src="assets/footer.html" />
+	</h:body>
+</html>

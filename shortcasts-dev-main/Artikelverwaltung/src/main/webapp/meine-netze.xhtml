@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	<h:head>
+		<title>GHOST NET FISHING</title>
+		<link rel="stylesheet" href="assets/style.css"></link>
+	</h:head>
+	
+	<h:body styleClass="#{loginHandlerBean.userdata eq 1 ? 'loggedin' : 'notLoggedIn'}">
+		<f:event listener="#{loginHandlerBean.checkUserSession}" type="preRenderView" />
+			<ui:include src="assets/navigation.xhtml" />
+			<main class="main--wrapper">
+				<h1>Meine Netze</h1>
+				
+				<h:dataTable value="#{markerPositionBean.currentUserNetsObject}" var="net" styleClass="my-table">
+				    <h:column>
+				        <f:facet name="header">Status</f:facet>
+				        <h:outputText value="Gemeldet" rendered="#{net.status eq 0}" />
+						<h:outputText value="Bergung bevorstehend" rendered="#{net.status eq 1}" />
+						<h:outputText value="Geborgen" rendered="#{net.status eq 2}" />
+						<h:outputText value="Verschollen" rendered="#{net.status eq 3}" />
+				    </h:column>
+				    <h:column>
+				        <f:facet name="header">Breitengrad</f:facet>
+				        #{net.lat}
+				    </h:column>
+				    <h:column>
+				        <f:facet name="header">Längengrad</f:facet>
+				        #{net.lng}
+				    </h:column>
+				    <h:column>
+				        <f:facet name="header">Beschreibung</f:facet>
+				        #{net.description}
+				    </h:column>
+				</h:dataTable>
+			</main>
+			<ui:include src="assets/footer.html" />
+	</h:body>
+</html>

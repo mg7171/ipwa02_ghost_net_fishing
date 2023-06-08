@@ -1,0 +1,271 @@
+:root {
+	--co-main: #5299D3;
+	--co-white: #FFFFFF;
+	--co-dark: #565B5F;
+	--co-light: #5D5D5D;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: 'Roboto', Arial, sans-serif;
+	display: grid;
+	grid-template-rows: 64px auto 48px;
+	height: 100%;
+}
+
+nav {
+	padding: 10px 40px;
+	background-color: var(--co-main);
+	font-size: 14px;
+	line-height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: #FFFFFF;
+	text-transform: uppercase;
+}
+
+nav ul li {
+	list-style: none;
+	padding: 0;
+	margin-left: 40px;
+}
+
+nav ul li a {
+	display: inline-block;
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+a.btn {
+	background-color: var(--co-white);
+	color: var(--co-main);
+	font-weight: bold;
+	text-decoration: none;
+	padding: 10px 45px;
+	border-radius: 4px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.btn.btn--blue {
+	background-color: var(--co-main);
+	color: var(--co-white);
+}
+
+
+footer {
+	background-color: var(--co-white);
+	border-top: 1px solid var(--co-light);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+footer a {
+	color: var(--co-dark);
+	font-size: 16px;
+	text-decoration: underline;
+	margin: 0 15px;
+	display: inline-block;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
+}
+
+main.floating {
+	background: rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main.floating .container {
+	background-color: #FFFFFF;
+	border-radius: 4px;
+	border: 1px solid #C0C7CE;
+	padding: 40px;
+	max-width: 520px;
+	width: 100%;
+}
+
+h1 {
+	font-size: 36px;
+	line-height: 46px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #565B5F;
+	margin: 0 0 40px 0;
+}
+
+p {
+	font-size: 16px;
+}
+
+main.main--wrapper {
+	max-width: 1040px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 50px 0;
+}
+
+label {
+	width: 100%;
+	font-size: 14px;
+	line-height: 18px;
+	color: #161B20;
+	margin-bottom: 8px;
+	display: block;
+}
+
+input[type="text"],
+input[type="password"] {
+	color: #161B20;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: lighter;
+	padding: 12px 16px;
+	border: 1px solid #81858C;
+	border-radius: 4px;
+	box-sizing: border-box;
+	width: 100%;
+	margin-bottom: 26px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	outline: var(--co-main);
+}
+
+.col--3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: 30px;
+}
+
+main {
+	position: relative;
+}
+
+.marker__details {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	border-radius: 4px;
+	background-color: #FFFFFF;
+	padding: 25px;
+	display: none;
+}
+
+.marker__details.active {
+	display: block;
+}
+
+.marker__details h2 {
+	margin-top: 0px;
+}
+
+input[type="submit"] {
+	color: #FFFFFF;
+	background-color: var(--co-main);
+	border-radius: 4px;
+	outline: none;
+	border: none;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 18px;
+	padding: 13px 45px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+input[type="submit"].rescued {
+	background-color: #155724;
+}
+
+input[type="submit"].lost {
+	background-color: #721C24;
+}
+
+form {
+	margin: 0;
+}
+
+.submit--wrapper {
+	text-align: right;
+}
+
+p.title {
+	font-weight: bold;
+	margin-bottom: 0px;
+	margin-top: 15px !important;
+	font-style: normal !important;
+}
+
+.marker__details p {
+	font-style: italic;
+	margin-top: 0px;
+}
+
+.marker__desc--header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.close {
+	display: inline-block;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+.marker__details input[type="text"] {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.marker__details form {
+	display: none;
+}
+
+.marker__details.status--0 form.register {
+	display: block;
+}
+
+.marker__details.status--1 form.rescued,
+.marker__details.status--1 form.lost {
+	display: block;
+}
+
+.my-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.my-table td,
+.my-table th {
+	text-align: left;
+	padding: 5px 10px;
+	border: 1px solid black;
+}
+
+.my-table th {
+	font-weight: bold;
+}

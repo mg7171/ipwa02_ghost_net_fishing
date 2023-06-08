@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	<h:head>
+		<title>GHOST NET FISHING</title>
+		<link rel="stylesheet" href="assets/style.css"/>
+		<script src="assets/jquery-3.7.0.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg"></script>
+ 	    <script type="text/javascript">
+	        function initMap() {
+	            var mapOptions = {
+	                center: {lat: 0, lng: 0},
+	                zoom: 6,
+	                maxZoom: 15,
+	                panControl: false,
+	                zoomControl: false,
+	                scaleControl: false,
+	                disableDefaultUI: true,
+	            };
+	            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	            #{markerPositionBean.markerPositions}.forEach(function(markerPosition) {
+	            	var image = 'assets/marker_default.svg';
+	            	var circleColor = '#E2E3E5';
+	            	
+	            	switch(markerPosition.status) {
+		            	case 1:
+		            		image = 'assets/marker_pending.svg';
+		            		circleColor = '#004085';
+		            		break;
+		            	case 2:
+		            		image = 'assets/marker_recovered.svg';
+		            		circleColor = '#155724';
+		            		break;
+		            	case 3:
+		            		image = 'assets/marker_lost.svg';
+		            		circleColor = '#721C24';
+		            		break;
+		            	}
+	            	
+	                var marker = new google.maps.Marker({
+	                    position: { lat: markerPosition.lat, lng: markerPosition.lng },
+	                    map: map,
+	                    icon: {
+	                        url: image,
+	                        scaledSize: new google.maps.Size(25, 40)
+	                    },
+	                });
+
+	                marker.addListener("click", () => {
+	                    map.setZoom(8);
+	                    map.setCenter(marker.getPosition());
+	                    openMarkerInterface(markerPosition);
+                  	});
+	                if(markerPosition.status == 0 || markerPosition.status == 1) {
+		                var circle = new google.maps.Circle({
+		                    strokeColor: circleColor,
+		                    strokeOpacity: 0.8,
+		                    strokeWeight: 2,
+		                    fillColor: circleColor,
+		                    fillOpacity: 0.35,
+		                    map,
+		                    center: { lat: markerPosition.lat, lng: markerPosition.lng },
+		                    radius: 25000,
+	                  	});
+	                }
+	            });
+	        }
+	        google.maps.event.addDomListener(window, 'load', initMap);
+	        
+	        function openMarkerInterface(data) {
+	        	console.log(data);
+	        	$('.status').text(getStatusText(data.status));
+	        	$('.description').text(handleText(data.description));
+	        	$('.lat').text(data.lat);
+	        	$('.lng').text(data.lng);
+	        	$('.time').text(calculateTime(data.insert_timestamp));
+	        	
+	        	$('.marker__details').find('input[type="text"]').val(data.id);
+	        	var statusClasses = ['status--0', 'status--1', 'status--2', 'status--3', 'status--4']; // Add more as needed
+	        	$('.marker__details').removeClass(statusClasses.join(' ')).addClass('active').addClass('status--'+data.status);
+
+	        }
+	        function getStatusText(status) {
+	        	switch(status) {
+		        	case 0:
+		        		return 'Gemeldet';
+		        	case 1:
+		        		return 'Bergung bevorstehend';
+		        	case 2:
+		        		return 'Geborgen';
+		        	case 3:
+		        		return 'Verschollen';
+	        	}
+	        	return status;
+	        }
+	        function calculateTime(time) {
+	        	if(time) {
+	        		return time;
+	        	} else {
+	        		return '-';
+	        	}
+	        }
+	        function handleText(text) {
+	        	if(text) {
+	        		return text;
+	        	} else {
+	        		return '-';
+	        	}
+	        }
+	        
+	        $(document).ready(function(){
+	        
+		        $('body').on('click', '.close', function() {
+		        	$('.marker__details').removeClass('active');
+	        	});
+	        	
+	        });
+	    </script>
+	</h:head>
+	<h:body styleClass="#{loginHandlerBean.userdata eq 1 ? 'loggedin' : 'notLoggedIn'}">
+		<f:event listener="#{loginHandlerBean.checkUserSession}" type="preRenderView" />
+		<ui:include src="assets/navigation.xhtml"/>
+		<main>
+	    	<div id="map"></div>
+	    	<div class="marker__details">
+		    	<div class="marker__desc--header">
+		    		<h2>Geister Netz</h2>
+		    		<img class="close" width="24" height="24" src="assets/close.svg" />
+				</div>
+	    		<p class="title">Status:</p>
+	    		<p class="status"></p>
+	    		
+	    		<p class="title">Beschreibung:</p>
+	    		<p class="description"></p>
+	    		
+	    		<p class="title">Breitengrad:</p>
+	    		<p class="lat"></p>
+	    		
+	    		<p class="title">Längengrad:</p>
+	    		<p class="lng"></p>
+	    		
+	    		<p class="title">Gemeldet vor ca.</p>
+	    		<p class="time"></p>
+	    		
+			    <h:form class="register">
+		        	<h:inputText value="#{netHandlerBean.id}" />
+		        	<h:commandButton value="Für bergung registrieren" action="#{netHandlerBean.register}" />
+				</h:form>
+				<div style="display:flex;">
+					<h:form class="rescued">
+			        	<h:inputText value="#{netHandlerBean.id}" />
+			        	<h:commandButton class="rescued" value="Netz geborgen" action="#{netHandlerBean.rescued}" />
+					</h:form>
+					<h:form class="lost">
+			        	<h:inputText value="#{netHandlerBean.id}" />
+			        	<h:commandButton class="lost" value="Netz verschollen" action="#{netHandlerBean.lost}" />
+					</h:form>
+				</div>
+		</div>
+			<div class="registered__markers">
+
+			</div>
+		</main>
+		<ui:include src="assets/footer.html" />
+	</h:body>
+</html>
